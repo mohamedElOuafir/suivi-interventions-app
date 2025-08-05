@@ -1,0 +1,280 @@
+.request-card-employee {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(92, 12, 12, 0.08), 0 1px 3px rgba(92, 12, 12, 0.1);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  min-height: 480px;
+  border: 1px solid rgba(92, 12, 12, 0.1);
+  position: relative;
+}
+
+.request-card-employee:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(92, 12, 12, 0.12), 0 6px 6px rgba(92, 12, 12, 0.1);
+}
+
+.request-card-employee .request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.request-card-employee .request-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.request-card-employee .request-header.pending {
+  background: linear-gradient(135deg, #F59E0B 0%, #f97316 100%);
+}
+
+.request-card-employee .request-header.inprogress {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563eb 100%);
+}
+
+.request-card-employee .request-header.done {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.request-card-employee .request-id {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.request-card-employee .request-status {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.request-card-employee .request-image-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(92, 12, 12, 0.08);
+}
+
+.request-card-employee .request-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.request-card-employee .request-image:hover {
+  transform: scale(1.05);
+}
+
+.request-card-employee .request-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.request-card-employee .request-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #911924;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.request-card-employee .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.request-card-employee .request-title {
+  font-size: 1.3rem;
+  color: #911924;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.25px;
+}
+
+.request-card-employee .request-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(92, 12, 12, 0.08);
+}
+
+.request-card-employee .progress-tracker {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.request-card-employee .progress-tracker span:first-child {
+  color: #911924;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.request-card-employee .progress-bar {
+  height: 6px;
+  background-color: rgba(92, 12, 12, 0.1);
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.request-card-employee .progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #911924 0%, #8a1a1a 100%);
+  transition: width 0.6s ease;
+}
+
+.request-card-employee .progress-text {
+  font-size: 0.85rem;
+  color: rgba(92, 12, 12, 0.7);
+  align-self: flex-end;
+}
+
+.card-actions-section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.card-actions-section.request-done{
+  flex-direction: column;
+  align-items: center;
+  gap : 5px;
+  padding: 0;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.request-update-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+}
+
+.request-update-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(22, 163, 74, 0.3);
+}
+
+.request-update-btn:active {
+  transform: translateY(0);
+}
+
+.request-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+}
+
+.request-cancel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.request-cancel-btn:active {
+  transform: translateY(0);
+}
+
+.request-cancel-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.request-cancel-btn:hover svg {
+  transform: rotate(90deg);
+}
+
+.request-complete-message {
+  color: #16a34a;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(22, 163, 74, 0.1);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.request-card-employee .export-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: #911924;
+  border: 1px solid rgba(92, 12, 12, 0.2);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.request-card-employee .export-button:hover {
+  background: rgba(92, 12, 12, 0.05);
+  background-color: #911924;
+  border-color: #911924;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.request-card-employee .export-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+@media (max-width : 768px) {
+  .card-actions-section svg{
+    display: none;
+  }
+}

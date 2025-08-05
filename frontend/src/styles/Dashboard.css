@@ -1,0 +1,142 @@
+.dashboard-admin-page {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-admin-header-container {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #b3becd;
+    padding-bottom: 1rem;
+}
+
+.dashboard-admin-header {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #911924;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-admin-subheader {
+    color: #64748b;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.charts-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 5rem;
+  padding: 1.5rem;
+  max-width: 1800px;
+  margin: 0 auto;
+  margin-bottom: 10%;
+  border-radius: 15px;
+  border : 1px solid #b3becd;
+}
+
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #b3becd;
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card-wide {
+  grid-column: span 2;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.chart-container {
+  position: relative;
+  flex-grow: 1;
+  max-height: 400px;
+  width: 100%;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+@media (max-width: 1200px) {
+  .chart-card-wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .charts-admin-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    border: none;
+  }
+
+  .chart-card {
+    width: 100%;
+  }
+
+  .chart-card.chart-card-wide{
+   height: 100%;
+   overflow-x: auto;
+  }
+
+  .chart-container {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chart-container canvas {
+    height: 100% !important;
+  }
+  
+}
+
+

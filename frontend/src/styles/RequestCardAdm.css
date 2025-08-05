@@ -1,0 +1,199 @@
+.request-card-admin {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid #b3becd;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.request-card-admin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.request-image-container {
+    flex : 1;
+    background-color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e2e8f0;
+}
+
+.request-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.request-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.request-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.request-title {
+    color: #911924;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.request-description {
+    height: 100px;
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-box-line-champ: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.request-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.request-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.request-date .icon {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+}
+
+.request-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.request-status.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.request-status.done {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.request-status.inprogress {
+    width: 70px;
+    background-color: #9fb9fc;
+    color: #105dc3;
+}
+
+.employee-details {
+    background-color: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.employee-title {
+    color: #911924;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+}
+
+.employee-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.employee-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+
+.field-label {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.field-value {
+    color: #334155;
+    font-size: 0.9rem;
+}
+
+.field-value.email {
+    color: #3b82f6;
+    word-break: break-all;
+}
+
+.see-button {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    height: 100%;
+}
+
+.see-button button {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #911924;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0;
+}
+
+.see-button button:hover {
+    background-color: #450909;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .request-card-admin {
+        flex-direction: column;
+    }
+    
+    .request-image-container {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .request-image-container img{
+        height : 200px
+    }
+    
+    .employee-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,341 @@
+.add-request-page {
+  padding: 7rem;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  position: relative;
+  margin-bottom: 10%;
+}
+
+.add-request-container {
+  width: 100%;
+  
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  border: 1px solid #b3becd;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  color: #911924;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: #64748b;
+  margin: 0;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.error-message svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.add-request-container .form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-request-container .form-group {
+  margin-bottom: 1rem;
+}
+
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.file-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-color: #f8fafc;
+  box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #911924;
+  box-shadow: 0 0 0 3px rgba(92, 12, 12, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family : Arial, Helvetica, sans-serif
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.file-upload-container {
+  position: relative;
+}
+
+.file-input {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.form-group .file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 120px;
+}
+
+.file-upload-label:hover {
+  border-color: #911924;
+  background-color: #f1f5f9;
+}
+
+.upload-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #911924;
+  stroke-width: 2;
+  fill: none;
+}
+
+.uploaded-image-container{
+  width: 100%;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.uploaded-image-container img{
+  object-fit: contain;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.file-upload-label span {
+  color: #334155;
+  font-weight: 500;
+}
+
+.file-name {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-input:focus + .file-upload-label,
+.file-input.has-file + .file-upload-label {
+  border-color: #911924;
+  background-color: rgba(92, 12, 12, 0.05);
+}
+
+.add-request-page .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #b3becd;
+}
+
+.cancel-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.add-request-page .submit-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #911924;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 0.5rem;
+}
+
+.add-request-page .submit-btn:hover {
+  background-color: #450909;
+}
+
+.add-request-page .submit-btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.card {
+  position: fixed;
+  bottom:100px;
+  right: 0;
+  width: 330px;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-left: 10px solid #269b24;
+  gap: 15px;
+  z-index: 9999;
+  animation: fromright 0.5s ease-in-out 0s 1;
+}
+.wave {
+  position: absolute;
+  transform: rotate(90deg);
+  left: -31px;
+  top: 32px;
+  width: 80px;
+  fill: #04e4003a;
+}
+.icon-container {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #04e40048;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+.icon {
+  width: 17px;
+  height: 17px;
+  color: #269b24;
+}
+.message-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+.message-text,
+.sub-text {
+  margin: 0;
+  cursor: default;
+}
+.message-text {
+  color: #269b24;
+  font-size: 17px;
+  font-weight: 700;
+}
+.sub-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.card button {
+  border : none;
+  background-color:#ffffff;
+  cursor:pointer;
+}
+
+.card button:hover{
+  background-color: #c0c0c0;
+}
+.cross-icon {
+  width: 18px;
+  height: 18px;
+  color: #555;
+  cursor: pointer;
+}
+
+@keyframes fromright{
+  0%{
+    transform: translateX(400px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .add-request-page {
+    margin-top: 10%;
+    padding: 1.5rem;
+  }
+
+  .add-request-container .form-actions{
+    display: grid;
+  }
+  
+  .submit-btn {
+    display: flex;
+    justify-content: center;
+    width: max-content;
+  }
+
+  .add-request-container .form-actions{
+    display: flex;
+  }
+}

@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    height: 100svh;
+    line-height: 1.5;
+    font-family : 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.popup {
+  position: fixed;
+  top : 70px;
+  left: 50%;
+  z-index: 3000;
+  margin: 10px;
+  box-shadow: 4px 4px 10px -10px rgba(0, 0, 0, 1);
+  gap:5px;
+  align-items: center;
+  display: flex;
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-weight: 300;
+  transform: translateX(-50%);
+}
+.popup svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.popup-icon svg {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.alert-popup {
+  background-color: #fefce8;
+  border: solid 1px #facc15;
+}
+.alert-icon path {
+  fill: #facc15;
+}
+.alert-message {
+  color: #ca8a04;
+}

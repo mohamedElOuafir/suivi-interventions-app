@@ -1,0 +1,250 @@
+.intervention-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    border: 1px solid #b3becd;
+    transition: transform 0.2s ease;
+    margin-bottom: 1.5rem;
+}
+
+.intervention-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.intervention-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #b3becd;
+}
+
+.intervention-timeline {
+    display: flex;
+    gap: 1rem;
+}
+
+.date-badge,
+.time-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #f8fafc;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    stroke: #911924;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+
+.section-title {
+    color: #911924;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0 0.75rem 0;
+}
+
+.technicien-info,
+.intervention-content {
+    margin-bottom: 1.5rem;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.detail-label {
+    color: #64748b;
+    font-weight: 500;
+    width: 120px;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: #334155;
+    font-size: 0.9rem;
+}
+
+.intervention-description {
+    color: #475569;
+    line-height: 1.6;
+    margin: 0.5rem 0 1.5rem 0;
+    padding-left: 0.5rem;
+    border-left: 3px solid #e2e8f0;
+}
+
+.pieces-list {
+    background-color: #f8fafc;
+    border-radius: 8px;
+    padding: 1rem;
+    
+}
+
+.piece-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: #334155;
+    list-style: none;
+}
+
+.piece-item li {
+    display: flex;
+    gap:1rem;
+}
+
+.piece-icon {
+    width: 18px;
+    height: 18px;
+    stroke: #911924;
+    flex-shrink: 0;
+}
+
+.intervention-card-total-cost{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 3%;
+}
+
+.intervention-card-total-cost span{
+    font-size: 20px;
+    font-weight: 600;
+    color: #911924;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #911924;
+}
+
+.intervention-card-buttons{
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+.update-button-intervention-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #16a34a; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.update-button-intervention-card:hover {
+  background-color: #15803d; 
+  transform: translateY(-1px);
+}
+
+.update-button-intervention-card:active {
+  transform: translateY(0);
+}
+
+.update-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+
+.export-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #dc2626; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.export-button:hover {
+  background-color: #b91c1c; 
+  transform: translateY(-1px);
+}
+
+.export-button:active {
+  transform: translateY(0);
+}
+
+.export-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+@media (max-width: 768px) {
+    .intervention-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .intervention-timeline {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    
+    .date-badge,
+    .time-badge {
+        width: fit-content;
+        justify-content: center;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .detail-label {
+        width: 100%;
+    }
+
+    .intervention-card-total-cost{
+        justify-content: center;
+        margin-bottom: 10%;
+    }
+
+    .export-button svg,
+    .update-button-intervention-card svg{
+       display: none;
+    }
+}

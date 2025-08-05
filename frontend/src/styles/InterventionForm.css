@@ -1,0 +1,256 @@
+.add-intervention-page{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+
+.intervention-form-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.intervention-form {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #a1acc1;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.error-message svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+
+.form-header {
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  color: #911924;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: #64748b;
+  margin: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group.span-full {
+  grid-column: span 2;
+}
+
+.tech-details-title-intervention-form{
+  color: #911924;
+  font-size: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.tech-details-title-intervention-form {
+  width: 100%;
+}
+
+.pieces-form {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.pieces-input-group {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-piece-btn {
+  background: #911924;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  height : 45px;
+  border-radius: 6px;
+  cursor: pointer;
+  transform: translateY(37px);
+}
+
+.pieces-list {
+  margin-top: 1.5rem;
+}
+
+.pieces-list h4 {
+  color: #911924;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.pieces-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.pieces-list table thead td {
+  background-color: #f8fafc;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid #b2bbc8;
+}
+
+.pieces-list table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #b2bbc8;
+  color: #334155;
+}
+
+.piece-item-intervention-form:hover {
+  background-color: #f8fafc;
+}
+
+.remove-piece {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.remove-piece:hover {
+  background-color: #fee2e2;
+}
+
+.intervention-total-cost{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 5%;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color : rgb(37, 37, 56);
+}
+
+.intervention-total-cost div{
+  width: fit-content;
+  border: 1px solid rgb(37, 37, 56);
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+} 
+
+.intervention-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid #a1acc1;
+}
+
+.cancel-btn {
+  background: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background: #911924;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .pieces-input-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .intervention-form .form-actions {
+    flex-direction: column;
+  }
+
+  .intervention-total-cost{
+    justify-content: center;
+  }
+
+  .pieces-list table {
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+  
+  .pieces-table th,
+  .pieces-table td {
+    padding: 0.5rem;
+  }
+  
+  .intervention-form .cancel-btn,
+  .intervention-form .submit-btn {
+    width: 100%;
+  }
+}
