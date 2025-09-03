@@ -156,12 +156,38 @@ export default function RequestCardEmp({demande, onDelete, onDeleteFailed, onUpd
 
 
     return (
-        <>
-            <div className="request-card-employee">
-                <div className={`request-header ${demande.statusDemande.toLowerCase().replace(/\s+/g, "")}`}>
-                    <span className="request-id">INT-{demande.idDemande}</span>
-                    <span className="request-status">{demande.statusDemande}</span>
+        <> 
+        <div className="request-card-employee">
+    <div className="request-card-inner">
+        <div className="request-header">
+            <div className="header-left">
+                <span className="request-id">INT-{demande.idDemande}</span>
+                <div className="request-timestamp">
+                    <span className="timestamp-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        {demande.dateDemande}
+                    </span>
+                    <span className="timestamp-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        {demande.timeDemande}
+                    </span>
                 </div>
+            </div>
+            <span className={`request-status-badge status-${demande.statusDemande.toLowerCase().replace(' ', '-')}`}>
+                {demande.statusDemande}
+            </span>
+        </div>
+        
+        <div className="request-content">
+            <div className="request-image-section">
                 <div className="request-image-container">
                     <img 
                         src={demande.imageUrl}
@@ -169,114 +195,123 @@ export default function RequestCardEmp({demande, onDelete, onDeleteFailed, onUpd
                         className="request-image"
                     />
                 </div>
+            </div>
+            
+            <div className="request-details-section">
                 <div className="request-body">
-                    <div className="request-meta">
-                    <div className="meta-item">
-                        <img src="/src/assets/icons/calender-icon.png" height={20} />
-                        <span>{demande.dateDemande}</span>
-                    </div>
-                    <div className="meta-item">
-                        <img src="/src/assets/icons/time-icon.png" height={20} />
-                        <span>{demande.timeDemande}</span>
-                    </div>
-                    </div>
-                    
-                    <h3 className="request-title">{demande.nomMateriel}</h3>
+                    <h2 className="request-title">{demande.nomMateriel}</h2>
                     <p className="request-description">{demande.description}</p>
                     
+                    {demande.statusDemande.toLowerCase() === "in progress" && (
+                        <div className="progress-tracker">
+                            <div className="progress-header">
+                                <span className="progress-label">Request Progress</span>
+                                <span className="progress-percentage">{progress}% Complete</span>
+                            </div>
+                            <div className="progress-bar-container">
+                                <div className="progress-bar">
+                                    <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    )}
                 </div>
-                {demande.statusDemande.toLowerCase() === "in progress" ? (
-                    <div className="progress-tracker">
-                        <span>Progression:</span>
-                        <div className="progress-bar">
-                            <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-                        </div>
-                        <span className="progress-text">{progress}% complete</span>
-                    </div>
-                ) : demande.statusDemande.toLowerCase() === "pending" ? (
-                    <div className="card-actions-section">
-                        <button 
-                            className="update-button-intervention-card"
-                            onClick={() => setIsUpdateFormOpen(true)}
-                            >
-                            <svg className="update-icon" viewBox="0 0 24 24">
-                                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
-                                    stroke="currentColor" strokeWidth="2" fill="none"/>
-                            </svg>
-                            Update
-                        </button>
-                        <button 
-                            className="btn request-cancel-btn"
-                            onClick={() => setIsCancelrequestDialogOpen(true)}
-                        >
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                width="20" 
-                                height="20" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                strokeWidth="2" 
-                                strokeLinecap="round" 
-                                strokeLinejoin="round"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
-                            Cancel Request
-                        </button>
-                    </div>
-                    ) : (
-                    <div className="card-actions-section request-done">
-                        <p className="request-complete-message">
-                            Your request has been completed. You can collect your material.
-                        </p>
-                        <div className="card-actions-section">
-                            <button 
-                                className="export-button"
-                                onClick={handleExportReport}
-                            >
-                                <svg className="export-icon" viewBox="0 0 24 24">
-                                    <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17" 
-                                        stroke="currentColor" strokeWidth="2" fill="none"/>
-                                </svg>
-                                Export a report
-                            </button>
-                        </div>
-                    </div>
-                )}
-                
             </div>
-
-
-            {isUpdateFormOpen && (
-                <EditRequestForm 
-                    demande={demande}
-                    onUpdate={setIsUpdateFormOpen}
-                    onUpdateMessage={onUpdateMessage}
-                />
-            )}
-
-            
-            {isCancelrequestDialogOpen && (
-                <div className="delete-confirmation-modal">
+        </div>
         
-                    <div className="modal-overlay"></div>
+        <div className="request-actions">
+            {demande.statusDemande.toLowerCase() === "in progress" ? (
+                <div className="progress-actions">
+                    <div className="status-indicator">
+                        <span className="progress-text">Your request is being processed...</span>
+                    </div>
                     
-                    <div className="confirmation-dialog">
-                        <h3>Confirm Canceling The Request</h3>
-                        <p>Are you sure you want to cancel this request?</p>
-                        <div className="confirmation-buttons">
-                            <button className="cancel-button" onClick={handleCancel}>
-                                Cancel
-                            </button>
-                            <button className="confirm-button" onClick={handleConfirm}>
-                                Yes
-                            </button>
+                </div>
+            ) : demande.statusDemande.toLowerCase() === "pending" ? (
+                <div className="pending-actions">
+                    <button 
+                        className="btn update"
+                        onClick={() => setIsUpdateFormOpen(true)}
+                    >
+                        <svg className="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Update Request
+                    </button>
+                    <button 
+                        className="btn btn-secondary btn-cancel"
+                        onClick={() => setIsCancelrequestDialogOpen(true)}
+                    >
+                        <svg className="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        Cancel Request
+                    </button>
+                </div>
+            ) : (
+                <div className="completed-actions">
+                    <div className="completion-message">
+                        <div className="success-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22,4 12,14.01 9,11.01"/>
+                            </svg>
+                        </div>
+                        <div className="completion-text">
+                            <h4>Request Completed Successfully</h4>
+                            <p>Your material is ready for collection.</p>
                         </div>
                     </div>
+                    <button 
+                        className="btn export"
+                        onClick={handleExportReport}
+                    >
+                        <svg className="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Export a Report
+                    </button>
                 </div>
             )}
-        </>
+        </div>
+    </div>
+</div>
+
+{isUpdateFormOpen && (
+    <EditRequestForm 
+        demande={demande}
+        onUpdate={setIsUpdateFormOpen}
+        onUpdateMessage={onUpdateMessage}
+    />
+)}
+
+{isCancelrequestDialogOpen && (
+    <div className="modal-overlay">
+        <div className="confirmation-dialog">
+            <div className="dialog-icon">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ef4444" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+            </div>
+            <h3>Confirm Request Cancellation</h3>
+            <p>Are you sure you want to cancel this request? This action cannot be undone and you'll need to create a new request if needed.</p>
+            <div className="dialog-actions">
+                <button className="btn btn-secondary" onClick={handleCancel}>
+                    Keep Request
+                </button>
+                <button className="btn btn-danger" onClick={handleConfirm}>
+                    Cancel Request
+                </button>
+            </div>
+        </div>
+    </div>
+)}
+</>
     )
 }
