@@ -6,6 +6,11 @@ import { type Demande, type Intervention } from "../../types/interfaces";
 import { useProfile } from "../../context/ProfileContext";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import companyLogo from '@/assets/icons/Logo-ROUANDI.png';
+import logo from '@/assets/icons/socit_rouandi_logo.jpeg';
+import repairIcon from '@/assets/icons/repair-icon.png';
+
+
 
 export default function ViewInterventions() {
 
@@ -80,7 +85,7 @@ export default function ViewInterventions() {
         fetchRequestById();
         fetchInterventions();
         
-        let clearNavigationStateTimer : number;
+        let clearNavigationStateTimer: any;
         //checking if the intervention form was on create mode or edit mode
         if(location.state?.isAdded){
             setIsInterventionAdded(true);
@@ -145,7 +150,7 @@ export default function ViewInterventions() {
         
         <div className="interventions-page">
             <div className="interventions-header">
-                <img className="logo" src="/src/assets/icons/Logo-ROUANDI.png"/>
+                <img className="logo" src={companyLogo}/>
                 <div className="header-top-row">
                     <button className="back-button" onClick={() => navigate('/Dashboard/Admin/ViewRequests')}>
                         <svg className="back-icon" viewBox="0 0 24 24">
@@ -275,7 +280,7 @@ export default function ViewInterventions() {
                 <div className="loader-container-view-interventions">
                     <div className="loader">
                         <img 
-                            src="/src/assets/icons/socit_rouandi_logo.jpeg" 
+                            src={logo}
                             alt="Loading..." 
                             className="loader-logo" 
                         />
@@ -294,7 +299,7 @@ export default function ViewInterventions() {
             ):(
                 <div className="empty-interventions-container">
                     <div className="empty-interventions-content">
-                        <img src="/src/assets/icons/repair-icon.png" />
+                        <img src={repairIcon} />
                         <h2 className="empty-interventions-title">There is no interventions yet...</h2>
                         <p className="empty-interventions-description">When interventions are created, they will appear here</p>
                     </div>

@@ -4,7 +4,7 @@ import type { ReqCardEmp } from '../types/interfaces';
 import EditRequestForm from '../Dashboards/employee/EditRequestForm';
 import jsPDF from 'jspdf';
 import { useProfile } from '../context/ProfileContext';
-
+import companyLogo from '@/assets/icons/Logo-ROUANDI.png';
 
 export default function RequestCardEmp({demande, onDelete, onDeleteFailed, onUpdateMessage}: ReqCardEmp) {
 
@@ -62,7 +62,7 @@ export default function RequestCardEmp({demande, onDelete, onDeleteFailed, onUpd
         const lightGray = '#999';
 
         // Header
-        doc.addImage('/src/assets/icons/Logo-ROUANDI.png', 'PNG', 5, 3, 30, 10);
+        doc.addImage(companyLogo, 'PNG', 5, 3, 30, 10);
         doc.setFontSize(20);
         doc.setTextColor(primaryColor);
         doc.setFont('helvetica', 'bold');

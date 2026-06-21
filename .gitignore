@@ -1,17 +1,13 @@
-# Node modules
+# Dependencies
 node_modules/
-backend/node_modules/
-frontend/node_modules/
 
 # Environment variables
 .env
 .env.local
 
-
 # Build directories
 dist/
 build/
-
 
 # IDE files
 .idea/
@@ -19,6 +15,9 @@ build/
 
 # System files
 .DS_Store
+
+#SQL scripts
+.sql
 
 # Logs
 npm-debug.log*

@@ -53,7 +53,7 @@ export const userAuthentification = async (req, res) => {
             [email]
         );
 
-        //verfication of existing of the user email
+        //verfication of the existance of the user email
         if (result.length === 0)
             return res.status(401).json({
                 available : false,

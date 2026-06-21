@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 import { useProfile } from '../context/ProfileContext';
-
+import comapnyLogo from '@/assets/icons/Logo-ROUANDI.png';
 
 export default function Footer() {
 
@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="footer-container">
                 <div className="footer-top">
                     <div className="brand-section">
-                        <img src="/src/assets/icons/Logo-ROUANDI.png" alt="Rouandi Logo" className="logo" />
+                        <img src={comapnyLogo} alt="Rouandi Logo" className="logo" />
                         <span className="company-name">Rouandi Maintain</span>
                         <p className="description">
                             Simplifying maintenance and equipment tracking through smart digital solutions.

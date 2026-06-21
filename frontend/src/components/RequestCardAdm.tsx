@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/RequestCardAdm.css';
 import type { Demande } from '../types/interfaces';
+import calenderIcon from '@/assets/icons/calender-icon.png';
 
 export default function RequestCardAdm(demande : Demande) {
 
@@ -22,7 +23,7 @@ export default function RequestCardAdm(demande : Demande) {
                     <p className="request-description">{demande.description}</p>
                     <div className="request-meta">
                         <span className="request-date">
-                            <img src="/src/assets/icons/calender-icon.png" height={20} width={20}/>
+                            <img src={calenderIcon} height={20} width={20}/>
                             {new Date(demande.dateDemande).toLocaleDateString()}
                         </span>
                         <span className={`request-status ${demande.statusDemande.replace(/\s+/g,'').toLowerCase()}`}>

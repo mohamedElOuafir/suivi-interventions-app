@@ -2,7 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useActiveLink } from "../context/activeLinkContext";
 import { useProfile } from "../context/ProfileContext";
 import '../styles/NavBar.css';
-
+import companyLogo from '@/assets/icons/Logo-ROUANDI.png';
+import dashboardIcon from '@/assets/icons/dashboard-icon.png';
+import viewRequestIcon from '@/assets/icons/view-requests-icon.png';
+import addRequestIcon from '@/assets/icons/add-request-icon.png';
+import requestIcon from '@/assets/icons/request-icon.png';
+import userIcon from '@/assets/icons/user.png';
 
 export default function NavBar() {
 
@@ -27,7 +32,7 @@ export default function NavBar() {
             <div className="navbar-container">
                 <div className="navbar-brand">
                    
-                    <img className="logo" src="/src/assets/icons/Logo-ROUANDI.png"/>
+                    <img className="logo" src={companyLogo}/>
                     
                 </div>
 
@@ -44,7 +49,7 @@ export default function NavBar() {
                                     to="/Dashboard/Admin" 
                                     className={`nav-link ${activeLink === '/Dashboard/Admin' ? "active" : ""}`}                            
                                 >
-                                    <img src="/src/assets/icons/dashboard-icon.png" height={25}/>
+                                    <img src={dashboardIcon} height={25}/>
                                     <span>Dashboard</span>
                                 </Link>
                             </li>
@@ -64,7 +69,7 @@ export default function NavBar() {
                                     to="/Dashboard/Admin/ViewRequests" 
                                     className={`nav-link ${activeLink === '/Dashboard/Admin/ViewRequests' ? "active" : ""}`}  
                                 >
-                                    <img src="/src/assets/icons/view-requests-icon.png" height={20}/>
+                                    <img src={viewRequestIcon} height={20}/>
                                     <span>View Requests</span>
                                 </Link>
                             </li>
@@ -89,7 +94,7 @@ export default function NavBar() {
                                     to="/Dashboard/Employee/AddRequestForm" 
                                     className={`nav-link ${activeLink === '/Dashboard/Employee/AddRequestForm' ? "active" : ""}`}                            
                                 >
-                                    <img src="/src/assets/icons/add-request-icon.png" height={20}/>
+                                    <img src={addRequestIcon} height={20}/>
                                     <span>Create Request</span>
                                 </Link>
                             </li>
@@ -98,7 +103,7 @@ export default function NavBar() {
                                     to="/Dashboard/Employee/MyRequests"
                                     className={`nav-link ${activeLink === '/Dashboard/Employee/MyRequests' ? "active" : ""}`}  
                                 >
-                                    <img src="/src/assets/icons/request-icon.png" height={20}/>
+                                    <img src={requestIcon} height={20}/>
                                     <span>My Requests</span>
                                 </Link>
                             </li>
@@ -126,7 +131,7 @@ export default function NavBar() {
                         <div className="user-info-section">
                             <div className="user-avatar" style={{position: "relative"}}>
                                 <span className="status-dot"></span>
-                                <img src="/src/assets/icons/user.png" height={40}/>
+                                <img src={userIcon} height={40}/>
                             </div>
                             
                             <div className="user-info">

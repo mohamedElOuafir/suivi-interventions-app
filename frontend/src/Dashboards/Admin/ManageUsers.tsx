@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import adminIcon from '@/assets/icons/admin.png';
 
 export default function ManageUsers() {
 
@@ -188,7 +189,7 @@ export default function ManageUsers() {
 
                     <div className="summary-card">
                         <div className="summary-icon admins">
-                            <img src="/src/assets/icons/admin.png" height={35}/>
+                            <img src={adminIcon} height={35}/>
                         </div>
                         <div className="summary-content">
                             <h3>Administrators</h3>

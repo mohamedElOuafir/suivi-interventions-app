@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import logo from '@/assets/icons/socit_rouandi_logo.jpeg';
+import boxIcon from '@/assets/icons/box.png';
 
 
 export default function ViewRequests() {
@@ -124,7 +126,7 @@ export default function ViewRequests() {
                     <div className="loader-container-view-requests">
                         <div className="loader">
                             <img 
-                                src="/src/assets/icons/socit_rouandi_logo.jpeg" 
+                                src={logo} 
                                 className="loader-logo" 
                             />
                         </div>
@@ -141,7 +143,7 @@ export default function ViewRequests() {
                 ):(
                     <div className="empty-requests-container">
                         <div className="empty-requests-content">
-                            <img src="/src/assets/icons/box.png" />
+                            <img src={boxIcon} />
                             <h2 className="empty-requests-title">There are no requests for the moment</h2>
                             <p className="empty-requests-description">When new requests arrive, they will appear here</p>
                         </div>

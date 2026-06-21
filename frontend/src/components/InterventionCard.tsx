@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/InterventionCard.css';
 import type { Intervention} from '../types/interfaces';
 import jsPDF from 'jspdf';
+import comapnyLogo from '@/assets/icons/Logo-ROUANDI.png';
+import calenderIcon from '@/assets/icons/calender-icon.png';
+import timeIcon from '@/assets/icons/time-icon.png';
+import pieceIcon from '@/assets/icons/piece-icon.png';
 
 export default function InterventionCard(intervention : Intervention) {
     const piecesList = intervention.piecesList!;
@@ -18,7 +22,7 @@ export default function InterventionCard(intervention : Intervention) {
         const lightGray = '#999';
 
         // Header
-        doc.addImage('/src/assets/icons/Logo-ROUANDI.png', 'PNG', 5, 3, 30, 10);
+        doc.addImage(comapnyLogo, 'PNG', 5, 3, 30, 10);
 
         doc.setFontSize(20);
         doc.setTextColor(primaryColor);
@@ -162,11 +166,11 @@ export default function InterventionCard(intervention : Intervention) {
             <div className="intervention-header">
                 <div className="intervention-timeline">
                     <div className="date-badge">
-                        <img src="/src/assets/icons/calender-icon.png" width={25} height={25} />
+                        <img src={calenderIcon} width={25} height={25} />
                         <span className="intervention-date">{intervention.dateIntervention}</span>
                     </div>
                     <div className="time-badge">
-                        <img src="/src/assets/icons/time-icon.png" width={25} height={25} />
+                        <img src={timeIcon} width={25} height={25} />
                         <span className="intervention-time">{intervention.timeIntervention}</span>
                     </div>
                 </div>
@@ -209,7 +213,7 @@ export default function InterventionCard(intervention : Intervention) {
                     <ul className="piece-item">
                         {piecesList.map((p, index) => (
                             <li key={index}>
-                                <img src="/src/assets/icons/piece-icon.png" height={25} width={25}/>
+                                <img src={pieceIcon} height={25} width={25}/>
                                 <span>{p.nomPiece}</span>
                                 <span> x{p.quantite}</span>
                                 <span>{p.UnitPrice.toFixed(2)}DH</span>

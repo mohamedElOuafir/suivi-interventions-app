@@ -3,6 +3,8 @@ import '../styles/Connexion.css';
 import { useNavigate } from "react-router-dom";
 import type { User } from "../types/interfaces";
 import { useProfile } from "../context/ProfileContext";
+import companyLogo from '@/assets/icons/Logo-ROUANDI.png';
+import lockIcon from '@/assets/icons/lock.png';
 
 export default function Connexion() {
 
@@ -91,7 +93,7 @@ export default function Connexion() {
             <div className="auth-card">
                 <div className="company-branding">
                     <img 
-                        src="/src/assets/icons/Logo-ROUANDI.png" 
+                        src={companyLogo} 
                         alt="Company Logo" 
                         className="company-logo"
                     />
@@ -125,7 +127,7 @@ export default function Connexion() {
                     <div className="form-group" id="password-field">
                         <label>Password</label>
                         <div className="input-with-icon">
-                            <img src="/src/assets/icons/lock.png" className="input-icon"/>
+                            <img src={lockIcon} className="input-icon"/>
                             <input
                                 type={inputType}
                                 placeholder="Enter your password"

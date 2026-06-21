@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/NotFoundPage.css';
+import notFoundIcon from '@/assets/icons/error-404-icon.png';
 
 
 export default function NotFoundPage() {
@@ -10,7 +11,7 @@ export default function NotFoundPage() {
         <div className="not-found-container">
             <div className="not-found-content">
                 <div className="not-found-illustration">
-                    <img src="/src/assets/icons/error-404-icon.png" />
+                    <img src={notFoundIcon} />
                 </div>
 
                 <h1 className="not-found-title">404 - Page Not Found</h1>

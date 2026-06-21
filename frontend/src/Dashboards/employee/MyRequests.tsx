@@ -9,6 +9,7 @@ import Footer from "../../components/Footer";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import '../../styles/MyRequests.css';
+import companyLogo from '@/assets/icons/socit_rouandi_logo.jpeg';
 
 
 export default function MyRequests() {
@@ -152,7 +153,7 @@ export default function MyRequests() {
                     <div className="loader">
                         <div className="loader-spinner"></div>
                         <img 
-                            src="/src/assets/icons/socit_rouandi_logo.jpeg" 
+                            src={companyLogo}
                             className="loader-logo" 
                             alt="Loading..."
                         />

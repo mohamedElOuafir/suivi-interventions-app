@@ -1,0 +1,10 @@
+.gitignore
+
+node_modules/
+
+README.md
+
+eslint.config.js
+
+.json
+
