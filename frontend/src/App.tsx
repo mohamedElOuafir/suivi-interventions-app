@@ -15,6 +15,7 @@ import DashboardAdm from "./Dashboards/Admin/DashboardAdm";
 import NotFoundPage from "./components/NotFoundPage";
 import NoInternetMessage from "./components/NoInternetMessage";
 import { ToastContainer } from "react-toastify";
+import AppHeader from "./components/AppHeader";
 
 
 
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <Router>
+      <AppHeader/>
       <ToastContainer position="top-center" autoClose={4000} />
 
       <ScrollToTopPage />

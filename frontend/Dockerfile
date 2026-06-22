@@ -20,13 +20,15 @@ RUN npm run build
 
 # ===== run =====
 
-FROM nginxinc/nginx-unprivileged:alpine
+FROM nginx:alpine
 
-WORKDIR /app
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 8080
 
-CMD [ "nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
