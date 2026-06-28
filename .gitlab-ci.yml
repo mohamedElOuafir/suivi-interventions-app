@@ -1,0 +1,82 @@
+stages:
+    - test
+    - build_image
+
+
+run_backend_tests:
+    image: node:20-slim
+    stage: test
+    cache:
+        key: backend_$CI_COMMIT_REF_SLUG
+        paths:
+            - ./backend/node_modules
+            - .npm/
+    before_script:
+        - cd ./backend
+        - npm ci
+    script:
+        - npm test
+
+
+run_frontend_tests:
+    image: node:20-alpine
+    stage: test
+    cache:
+        key: frontend_$CI_COMMIT_REF_SLUG
+        paths:
+        - ./frontend/node_modules
+        - .npm/
+    before_script:
+        - cd ./frontend
+        - npm ci
+    script:
+        - npm test
+
+
+build_backend_image:
+    stage: build_image
+    image: docker:29.6.1
+    variables:
+        DOCKER_TLS_CERTDIR: "/certs"
+    services:
+        - docker:29.6.1-dind
+    rules:
+        - if: '$CI_COMMIT_BRANCH == "main"'
+    before_script:
+        - cd ./backend
+        - echo "building the backend docker image"
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USER --password-stdin
+
+    script:
+        - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA.
+        - docker push $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG
+
+
+
+build_frontend_image:
+    stage: build_image
+    image: docker:29.6.1
+    services:
+        - docker:29.6.1-dind
+    variables:
+        DOCKER_TLS_CERTDIR: "/certs"
+    rules:
+        - if: '$CI_COMMIT_BRANCH == "main"'
+    before_script:
+        - cd ./frontend
+        - echo "building the frontend docker image"
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USER --password-stdin
+    script:
+        - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
+        - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
+
+
+
+
+
+
+
+
+
+
+
