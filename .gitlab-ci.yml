@@ -45,7 +45,7 @@ build_backend_image:
     before_script:
         - cd ./backend
         - echo "building the backend docker image"
-        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USER --password-stdin
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin
 
     script:
         - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
@@ -66,7 +66,7 @@ build_frontend_image:
     before_script:
         - cd ./frontend
         - echo "building the frontend docker image"
-        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USER --password-stdin
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin
     script:
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
         - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
