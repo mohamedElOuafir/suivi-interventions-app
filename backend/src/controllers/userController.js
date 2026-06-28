@@ -8,15 +8,14 @@ export const getAllUsers = async (req , res) => {
 
     //Verification of the user's role:
     if(req.user.role.toLowerCase() !== 'admin')
-        return res.json({message : "permission denied!"});
+        return res.status(403).json({message : "permission denied!"});
 
     const connection = await pool.getConnection();  
     try {
         
         const [result] = await connection.query('SELECT * FROM utilisateur');
-        connection.release(); 
 
-        return res.json(result.filter(u => u.id !== 1 && u.id !== req.user.id)); 
+        return res.status(200).json(result.filter(u => u.id !== 1 && u.id !== req.user.id)); 
 
     } catch (e) {
         return res.status(500).json({ error: e.message });
@@ -32,7 +31,7 @@ export const addUser = async (req , res) => {
 
     //Verification of the user's role:
     if(req.user.role.toLowerCase() !== 'admin')
-        return res.json({message : "permission denied!"});
+        return res.status(403).json({message : "permission denied!"});
 
     const {newUser} = req.body;
     //creating a random password:
@@ -58,12 +57,12 @@ export const addUser = async (req , res) => {
         const valid = await sendPasswordViaMail(newUser, password);
 
         if(!valid)
-            return res.json({
+            return res.status(400).json({
                 userAdded : false,
                 emailExist : false
             });
 
-        return res.json({
+        return res.status(200).json({
             userAdded : true,
             result,
             emailExist : true
@@ -83,7 +82,7 @@ export const getUserById = async (req , res) => {
 
     //Verification of the user's role:
     if(req.user.role.toLowerCase() !== 'admin')
-        return res.json({message : "permission denied!"});
+        return res.status(403).json({message : "permission denied!"});
 
     const id = req.params.id;
     const connection = await pool.getConnection();
@@ -92,15 +91,17 @@ export const getUserById = async (req , res) => {
         
         const [result] = await connection.query('SELECT * FROM utilisateur WHERE id = ?', [id]);
 
-        if(result.length > 0)
-            return res.json({
-                founded : true,
-                userData : result[0]
+        if(result.length === 0){
+            return res.status(400).json({
+                founded : false
             });
-            
-        return res.json({
-            founded : false
+        }
+        
+        return res.status(200).json({
+            founded : true,
+            userData : result[0]
         });
+        
     }catch(e){
         return res.status(500).json({error : e.message});
     }finally{
@@ -115,7 +116,7 @@ export const deleteUser = async (req , res) => {
 
     //Verification of the user's role:
     if(req.user.role.toLowerCase() !== 'admin')
-        return res.json({message : "permission denied!"});
+        return res.status(403).json({message : "permission denied!"});
 
     const id = Number(req.params.id);
     const connection = await pool.getConnection();
@@ -158,7 +159,7 @@ export const editUser = async (req , res) => {
             [user.nom, user.prenom, user.tel, user.email, user.departement, user.role, user.id]
         );
 
-        return res.json({updated : true, message : "user updated"});
+        return res.status(200).json({updated : true, message : "user updated"});
     }catch(e){
         return res.status(500).json({updated : false, error : e.message});
     }finally{
@@ -177,13 +178,13 @@ export const editUserPassword = async (req , res) => {
     //is the old password field match the first password setted:
     const isTrueOldPassword = await bcrypt.compare(oldPassword, req.user.motDePasse);
     if(!isTrueOldPassword)
-        return res.json({message : "Incorrect old password"});
+        return res.status(400).json({message : "Incorrect old password"});
 
 
     //is the new password as same as the old one:
     const samePassword = await bcrypt.compare(newPassword, req.user.motDePasse);
     if(samePassword)
-        return res.json({message : "PLease choose a new password !"});
+        return res.status(400).json({message : "PLease choose a new password !"});
 
 
     const connection = await pool.getConnection();

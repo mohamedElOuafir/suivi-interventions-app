@@ -1,4 +1,4 @@
-import {pool} from '../database/db.js';
+import { pool } from '../database/db.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
@@ -43,7 +43,7 @@ export const createTheFirstAdmin = async () => {
 //user athentification with generating a jwt token :
 export const userAuthentification = async (req, res) => {
 
-    const { email, password } =  req.body;
+    const {email, password} =  req.body;
     const connection = await pool.getConnection();
 
     try {
@@ -70,7 +70,7 @@ export const userAuthentification = async (req, res) => {
         //generating a new jwt token for the user:
         const token = jwt.sign(user, process.env.JWT_SECRET_KEY, {expiresIn : "2h"});
 
-        return res.json({
+        return res.status(200).json({
             available : true,
             token,
             userData : user,

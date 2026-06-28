@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { createTheFirstAdmin } from "./controllers/authController.js";
+import { createTheFirstAdmin } from "./src/controllers/authController.js";
 
 const app = express();
 
@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
 //getting all routes:
-import userRoutes from './routes/userRoutes.js';
-import authRoutes from './routes/authRoutes.js';
-import interventionRoutes from './routes/interventionRoutes.js';
-import requestRoutes from './routes/requestRoutes.js';
+import userRoutes from './src/routes/userRoutes.js';
+import authRoutes from './src/routes/authRoutes.js';
+import interventionRoutes from './src/routes/interventionRoutes.js';
+import requestRoutes from './src/routes/requestRoutes.js';
 
 app.use(userRoutes);
 app.use(authRoutes);

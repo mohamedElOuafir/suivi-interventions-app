@@ -1,6 +1,6 @@
 import {pool} from '../database/db.js';
 import cloudinary from '../uploadImages/cloudinary.js';
-
+import streamifier from "streamifier";
 
 //getting request by its Id:
 export const getRequestById = async (req , res) => {
@@ -167,9 +167,12 @@ export const addRequest = async (req, res) => {
     if (req.user.role.toLowerCase() !== 'employee')
         return res.json({message : "creating a request is not allowed"});
 
+    if (!req.file) {
+        return res.status(400).json({
+            message: "Image is required"
+        });
+    }   
 
-    const imageUrl = req.file.path || req.file.url;
-    const imageId = req.file.filename;
 
     const {
         nomMateriel,
@@ -186,6 +189,31 @@ export const addRequest = async (req, res) => {
     const connection = await pool.getConnection();
 
     try {
+
+        const resultUpload = await new Promise((resolve, reject) => {
+
+            const stream = cloudinary.uploader.upload_stream(
+                {
+                    folder: "requests-images"
+                },
+                (error, result) => {
+
+                    if (error)
+                        return reject(error);
+
+                    resolve(result);
+                }
+            );
+
+            streamifier.createReadStream(req.file.buffer).pipe(stream);
+
+        });
+
+
+        const imageUrl = resultUpload.secure_url;
+        const imageId = resultUpload.public_id;
+
+
         //excuting the sql request to insert this request:
         const [result] = await connection.query(query, [
             nomMateriel,
