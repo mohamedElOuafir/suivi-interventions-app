@@ -9,10 +9,10 @@ run_backend_tests:
     cache:
         key: backend_$CI_COMMIT_REF_SLUG
         paths:
-            - ./backend/node_modules
-            - .npm/
+            - ./backend/.npm/
     before_script:
         - cd ./backend
+        - npm config set cache .npm --global
         - npm ci
     script:
         - npm test
@@ -24,10 +24,10 @@ run_frontend_tests:
     cache:
         key: frontend_$CI_COMMIT_REF_SLUG
         paths:
-        - ./frontend/node_modules
-        - .npm/
+        - ./frontend/.npm/
     before_script:
         - cd ./frontend
+        - npm config set cache .npm --global
         - npm ci
     script:
         - npm test
@@ -48,8 +48,9 @@ build_backend_image:
         - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USER --password-stdin
 
     script:
-        - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA.
+        - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
         - docker push $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG
+        - docker push $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
 
 
 
@@ -69,6 +70,7 @@ build_frontend_image:
     script:
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
         - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
+        - docker push $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
 
 
 
