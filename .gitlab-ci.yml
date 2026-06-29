@@ -20,8 +20,8 @@ stages:
         - apk add --no-cache curl
         - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
         - pwd
+        - cd ./bin
         - ls -al
-        - find / -name trivy
 
 
 
