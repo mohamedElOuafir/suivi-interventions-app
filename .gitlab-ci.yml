@@ -16,6 +16,10 @@ stages:
         DOCKER_TLS_CERTDIR: "/certs"
     rules:
         - if: '$CI_COMMIT_BRANCH == "main"'
+    before_script:
+        - apk add --no-cache curl
+        - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+
 
 
 
@@ -77,11 +81,15 @@ build_backend_image:
 
     script:
         - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
-        - docker run aquasec/trivy:0.71.2 image \
-                                                --severity HIGH,CRITICAL \
-                                                --exit-code 1 \
-                                                --no-progress \
-                                                $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
+        - ./bin/trivy image \
+                            --severity HIGH,CRITICAL \
+                            --exit-code 1 \
+                            --no-progress \
+                            $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
+
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin docker.io
+        - docker push $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG
+        - docker push $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
 
 
 
@@ -93,13 +101,13 @@ build_frontend_image:
         - echo "building the frontend docker image"
     script:
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
-        - docker run aquasec/trivy:0.71.2 image \
-                                                --severity HIGH,CRITICAL \
-                                                --exit-code 1 \
-                                                --no-progress \
-                                                $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
+        - ./bin/trivy image \
+                            --severity HIGH,CRITICAL \
+                            --exit-code 1 \
+                            --no-progress \
+                            $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
 
-        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin docker.io
         - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
         - docker push $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
 
