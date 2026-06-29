@@ -78,11 +78,7 @@ build_backend_image:
         - cd ./backend
         - echo "building the backend docker image"
         - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
-        - trivy image \
-                            --severity HIGH,CRITICAL \
-                            --exit-code 1 \
-                            --no-progress \
-                            $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
+        - trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress "$IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA"
 
         - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin docker.io
         - docker push $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG
@@ -97,12 +93,8 @@ build_frontend_image:
         - cd ./frontend
         - echo "building the frontend docker image"
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
-        - trivy image \
-                            --severity HIGH,CRITICAL \
-                            --exit-code 1 \
-                            --no-progress \
-                            $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
-
+        - trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress "$IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA"
+        
         - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin docker.io
         - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
         - docker push $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
