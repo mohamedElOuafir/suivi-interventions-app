@@ -21,6 +21,7 @@ stages:
         - curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
         - pwd
         - ls -al
+        - find / -name trivy
 
 
 
