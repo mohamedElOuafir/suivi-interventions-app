@@ -8,7 +8,7 @@ stages:
 
 # A base instructions for the docker in docker concept
 .docker_daemon:
-    stage: build_image
+    stage: build_scan_push_image
     image: docker:29.6.1
     services:
         - docker:29.6.1-dind
