@@ -1,10 +1,25 @@
+
+# CI stages definition
 stages:
     - test
     - quality_code_check
-    - build_image
-    - scan_built_image
+    - build_scan_push_image
 
 
+# A base instructions for the docker in docker concept
+.docker_daemon:
+    stage: build_image
+    image: docker:29.6.1
+    services:
+        - docker:29.6.1-dind
+    variables:
+        DOCKER_TLS_CERTDIR: "/certs"
+    rules:
+        - if: '$CI_COMMIT_BRANCH == "main"'
+
+
+
+# Running tests for the backend 
 run_backend_tests:
     image: node:20-slim
     stage: test
@@ -20,6 +35,7 @@ run_backend_tests:
         - npm test
 
 
+# Running the tests for the frontend
 run_frontend_tests:
     image: node:20-alpine
     stage: test
@@ -35,6 +51,7 @@ run_frontend_tests:
         - npm test
 
 
+# Quality code check for the whole repository (frontend, backend)
 sonar_cloud_check:
     stage: quality_code_check
     image: sonarsource/sonar-scanner-cli:12.1
@@ -50,63 +67,44 @@ sonar_cloud_check:
         - sonar-scanner
 
 
+
+# Building and scaning for vulnerabilities in backend image, then pushing it to the registry
 build_backend_image:
-    stage: build_image
-    image: docker:29.6.1
-    variables:
-        DOCKER_TLS_CERTDIR: "/certs"
-    services:
-        - docker:29.6.1-dind
-    rules:
-        - if: '$CI_COMMIT_BRANCH == "main"'
+    extends: .docker_daemon
     before_script:
         - cd ./backend
         - echo "building the backend docker image"
-        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
 
     script:
         - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
-        - docker push $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG
-        - docker push $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
+        - docker run aquasec/trivy:0.71.2 image \
+                                                --severity HIGH,CRITICAL \
+                                                --exit-code 1 \
+                                                --no-progress \
+                                                $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
 
 
 
+# Building and scaning for vulnerabilities in frontend image, then pushing it to the registry
 build_frontend_image:
-    stage: build_image
-    image: docker:29.6.1
-    services:
-        - docker:29.6.1-dind
-    variables:
-        DOCKER_TLS_CERTDIR: "/certs"
-    rules:
-        - if: '$CI_COMMIT_BRANCH == "main"'
+    extends: .docker_daemon
     before_script:
         - cd ./frontend
         - echo "building the frontend docker image"
-        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     script:
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
+        - docker run aquasec/trivy:0.71.2 image \
+                                                --severity HIGH,CRITICAL \
+                                                --exit-code 1 \
+                                                --no-progress \
+                                                $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
+
+        - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin
         - docker push $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG
         - docker push $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
 
 
-scan_backend_image:
-    image: aquasec/trivy:0.71.2
-    stage: scan_built_image
-    rules:
-        - if: '$CI_COMMIT_BRANCH == "main"'
-    script:
-        - trivy image --severity CRITICAL,HIGH --exit-code 1 --no-progress $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA
-
-
-scan_frontend_image:
-    image: aquasec/trivy:0.71.2
-    stage: scan_built_image
-    rules:
-        - if: '$CI_COMMIT_BRANCH == "main"'
-    script:
-        - trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA
-
+    
 
 
 
