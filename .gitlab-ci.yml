@@ -75,11 +75,9 @@ sonar_cloud_check:
 # Building and scaning for vulnerabilities in backend image, then pushing it to the registry
 build_backend_image:
     extends: .docker_daemon
-    before_script:
+    script:
         - cd ./backend
         - echo "building the backend docker image"
-
-    script:
         - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
         - ./bin/trivy image \
                             --severity HIGH,CRITICAL \
@@ -95,11 +93,10 @@ build_backend_image:
 
 # Building and scaning for vulnerabilities in frontend image, then pushing it to the registry
 build_frontend_image:
-    extends: .docker_daemon
-    before_script:
+    extends: .docker_daemon    
+    script:
         - cd ./frontend
         - echo "building the frontend docker image"
-    script:
         - docker build -t $IMAGE_FRONTEND_NAME:$IMAGE_FRONTEND_TAG -t $IMAGE_FRONTEND_NAME:$CI_COMMIT_SHORT_SHA .
         - ./bin/trivy image \
                             --severity HIGH,CRITICAL \
