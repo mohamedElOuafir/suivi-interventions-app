@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -8,7 +8,9 @@ RUN npm install
 
 COPY . .
 
-RUN groupadd -r backendGroup && useradd -r -g backendGroup -d /app -s /sbin/nologin backendUser && chown -R backendUser:backendGroup /app
+RUN addgroup -S backendGroup && adduser -S backendUser -G backendGroup
+
+RUN chown -R backendUser:backendGroup /app
 
 EXPOSE 3000
 
