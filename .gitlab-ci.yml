@@ -77,7 +77,7 @@ build_backend_image:
     script:
         - cd ./backend
         - echo "building the backend docker image"
-        - docker build -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
+        - docker build --no-cache -t $IMAGE_BACKEND_NAME:$IMAGE_BACKEND_TAG -t $IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA .
         - trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress "$IMAGE_BACKEND_NAME:$CI_COMMIT_SHORT_SHA"
 
         - echo "$REGISTRY_TOKEN" | docker login -u $REGISTRY_USERNAME --password-stdin docker.io
