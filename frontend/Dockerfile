@@ -1,12 +1,12 @@
 # ===== build =====
 
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json /app/
 
-RUN npm install
+RUN npm ci
 
 COPY vite.config.ts tsconfig.node.json tsconfig.app.json tsconfig.json ./
 
